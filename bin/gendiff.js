@@ -6,9 +6,11 @@ const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
 
+const getData = (filepath) => JSON.parse(fs.readFileSync(path.resolve(filepath), { encoding: 'utf8', flag: 'r' }));
+
 const genDiff = (filepath1, filepath2) => {
-  const data1 = JSON.parse(fs.readFileSync(path.resolve(filepath1), { encoding: 'utf8', flag: 'r' }));
-  const data2 = JSON.parse(fs.readFileSync(path.resolve(filepath2), { encoding: 'utf8', flag: 'r' }));
+  const data1 = getData(filepath1);
+  const data2 = getData(filepath2);
   const keys1 = Object.keys(data1);
   const keys2 = Object.keys(data2);
   const values1 = Object.values(data1);
@@ -52,4 +54,5 @@ program
   .action((filepath1, filepath2) => {
     console.log(genDiff(filepath1, filepath2));
   });
+
 program.parse();
