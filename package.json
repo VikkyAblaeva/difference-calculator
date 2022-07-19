@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "module",
+    "type": "git",
     "url": "git+https://github.com/VikkyAblaeva/frontend-project-lvl2.git"
   },
   "author": "Vika Ablaeva",
@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/VikkyAblaeva/frontend-project-lvl2/issues"
   },
+  "type": "module",
   "homepage": "https://github.com/VikkyAblaeva/frontend-project-lvl2#readme",
   "bin": {
     "gendiff": "bin/gendiff.js"
