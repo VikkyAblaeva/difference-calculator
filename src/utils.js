@@ -2,48 +2,48 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 
-const getData = (filepath) => JSON.parse(fs.readFileSync(path.resolve(filepath), { encoding: 'utf8', flag: 'r' }));
+const getJsonData = (filepath) => JSON.parse(fs.readFileSync(path.resolve(filepath), { encoding: 'utf8', flag: 'r' }));
 
-const getStringGenDiff = (arrayForString) => {
-  let stringGenDiff = '';
-  for (let i = 0; i < arrayForString.length; i += 1) {
-    stringGenDiff = `${stringGenDiff}\n  ${arrayForString[i].status} ${arrayForString[i].key}: ${arrayForString[i].value}`;
+const getDifferencesToString = (differences) => {
+  let differencesToString = '';
+  for (let i = 0; i < differences.length; i += 1) {
+    differencesToString = `${differencesToString}\n  ${differences[i].status} ${differences[i].key}: ${differences[i].value}`;
   }
-  return `{${stringGenDiff}\n}`;
+  return `{${differencesToString}\n}`;
 };
 
 const getKeys = (filepath) => {
-  const keys = Object.keys(getData(filepath));
+  const keys = Object.keys(getJsonData(filepath));
   return keys;
 };
 
 const getValues = (filepath) => {
-  const values = Object.values(getData(filepath));
+  const values = Object.values(getJsonData(filepath));
   return values;
 };
 
-const genDiff = (filepath1, filepath2) => {
-  const keys1 = getKeys(filepath1);
-  const keys2 = getKeys(filepath2);
-  const values1 = getValues(filepath1);
-  const values2 = getValues(filepath2);
-  let helper = [];
-  for (let i = 0; i < keys1.length; i += 1) {
-    if (keys2.includes(keys1[i]) && values2.includes(values1[i])) {
-      helper.push({ key: keys1[i], value: values1[i], status: ' ' });
+const genDiff = (pathOfInitialFile, pathOfChangedFile) => {
+  const keysOfInitialFile = getKeys(pathOfInitialFile);
+  const keysOfChangedFile = getKeys(pathOfChangedFile);
+  const valuesOfInitialFile = getValues(pathOfInitialFile);
+  const valuesOfChsngedFile = getValues(pathOfChangedFile);
+  let differences = [];
+  for (let i = 0; i < keysOfInitialFile.length; i += 1) {
+    if (keysOfChangedFile.includes(keysOfInitialFile[i]) && valuesOfChsngedFile.includes(valuesOfInitialFile[i])) {
+      differences.push({ key: keysOfInitialFile[i], value: valuesOfInitialFile[i], status: ' ' });
     }
-    if (!keys2.includes(keys1[i]) || (keys2.includes(keys1[i]) && !values2.includes(values1[i]))) {
-      helper.push({ key: keys1[i], value: values1[i], status: '-' });
-    }
-  }
-  for (let i = 0; i < keys2.length; i += 1) {
-    if (!keys1.includes(keys2[i]) || (keys1.includes(keys2[i]) && !values1.includes(values2[i]))) {
-      helper.push({ key: keys2[i], value: values2[i], status: '+' });
+    if (!keysOfChangedFile.includes(keysOfInitialFile[i]) || (keysOfChangedFile.includes(keysOfInitialFile[i]) && !valuesOfChsngedFile.includes(valuesOfInitialFile[i]))) {
+      differences.push({ key: keysOfInitialFile[i], value: valuesOfInitialFile[i], status: '-' });
     }
   }
-  helper = _.sortBy(helper, ['key']);
-  const stringGenDiff = getStringGenDiff(helper);
-  return stringGenDiff;
+  for (let i = 0; i < keysOfChangedFile.length; i += 1) {
+    if (!keysOfInitialFile.includes(keysOfChangedFile[i]) || (keysOfInitialFile.includes(keysOfChangedFile[i]) && !valuesOfInitialFile.includes(valuesOfChsngedFile[i]))) {
+      differences.push({ key: keysOfChangedFile[i], value: valuesOfChsngedFile[i], status: '+' });
+    }
+  }
+  differences = _.sortBy(differences, ['key']);
+  const differencesToString = getDifferencesToString(differences);
+  return differencesToString;
 };
 
-export { getData, genDiff };
+export { getJsonData, genDiff };
