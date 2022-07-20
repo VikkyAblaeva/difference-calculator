@@ -13,12 +13,10 @@ const getStringGenDiff = (arrayForString) => {
 };
 
 const genDiff = (filepath1, filepath2) => {
-  const data1 = getData(filepath1);
-  const data2 = getData(filepath2);
-  const keys1 = Object.keys(data1);
-  const keys2 = Object.keys(data2);
-  const values1 = Object.values(data1);
-  const values2 = Object.values(data2);
+  const keys1 = Object.keys(getData(filepath1));
+  const keys2 = Object.keys(getData(filepath2));
+  const values1 = Object.values(getData(filepath1));
+  const values2 = Object.values(getData(filepath2));
   let helper = [];
   for (let i = 0; i < keys1.length; i += 1) {
     if (keys2.includes(keys1[i]) && values2.includes(values1[i])) {
