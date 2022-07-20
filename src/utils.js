@@ -4,6 +4,14 @@ import _ from 'lodash';
 
 const getData = (filepath) => JSON.parse(fs.readFileSync(path.resolve(filepath), { encoding: 'utf8', flag: 'r' }));
 
+const getStringGenDiff = (arrayForString) => {
+  let stringGenDiff = '';
+  for (let i = 0; i < arrayForString.length; i += 1) {
+    stringGenDiff = `${stringGenDiff}\n  ${arrayForString[i].status} ${arrayForString[i].key}: ${arrayForString[i].value}`;
+  }
+  return `{${stringGenDiff}\n}`;
+};
+
 const genDiff = (filepath1, filepath2) => {
   const data1 = getData(filepath1);
   const data2 = getData(filepath2);
@@ -12,7 +20,6 @@ const genDiff = (filepath1, filepath2) => {
   const values1 = Object.values(data1);
   const values2 = Object.values(data2);
   let helper = [];
-  let result = '';
   for (let i = 0; i < keys1.length; i += 1) {
     if (keys2.includes(keys1[i]) && values2.includes(values1[i])) {
       helper.push({ key: keys1[i], value: values1[i], status: ' ' });
@@ -33,10 +40,8 @@ const genDiff = (filepath1, filepath2) => {
     }
   }
   helper = _.sortBy(helper, ['key']);
-  for (let i = 0; i < helper.length; i += 1) {
-    result = `${result}\n  ${helper[i].status} ${helper[i].key}: ${helper[i].value}`;
-  }
-  return `{${result}\n}`;
+  const stringGenDiff = getStringGenDiff(helper);
+  return stringGenDiff;
 };
 
 export { getData, genDiff };
