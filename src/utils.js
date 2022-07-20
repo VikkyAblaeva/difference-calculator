@@ -24,18 +24,12 @@ const genDiff = (filepath1, filepath2) => {
     if (keys2.includes(keys1[i]) && values2.includes(values1[i])) {
       helper.push({ key: keys1[i], value: values1[i], status: ' ' });
     }
-    if (!keys2.includes(keys1[i])) {
-      helper.push({ key: keys1[i], value: values1[i], status: '-' });
-    }
-    if (keys2.includes(keys1[i]) && !values2.includes(values1[i])) {
+    if (!keys2.includes(keys1[i]) || (keys2.includes(keys1[i]) && !values2.includes(values1[i]))) {
       helper.push({ key: keys1[i], value: values1[i], status: '-' });
     }
   }
   for (let i = 0; i < keys2.length; i += 1) {
-    if (!keys1.includes(keys2[i])) {
-      helper.push({ key: keys2[i], value: values2[i], status: '+' });
-    }
-    if (keys1.includes(keys2[i]) && !values1.includes(values2[i])) {
+    if (!keys1.includes(keys2[i]) || (keys1.includes(keys2[i]) && !values1.includes(values2[i]))) {
       helper.push({ key: keys2[i], value: values2[i], status: '+' });
     }
   }
