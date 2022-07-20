@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/VikkyAblaeva/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/VikkyAblaeva/frontend-project-lvl2/actions)
 
-![example workflow](https://github.com/VikkyAblaeva/frontend-project-lvl2/workflows/lint-check/badge.svg)
+![example workflow](https://github.com/VikkyAblaeva/frontend-project-lvl2/workflows/eslint-check/badge.svg)
 
 <h3>Example:</h3>
 
