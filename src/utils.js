@@ -12,11 +12,21 @@ const getStringGenDiff = (arrayForString) => {
   return `{${stringGenDiff}\n}`;
 };
 
+const getKeys = (filepath) => {
+  const keys = Object.keys(getData(filepath));
+  return keys;
+};
+
+const getValues = (filepath) => {
+  const values = Object.values(getData(filepath));
+  return values;
+};
+
 const genDiff = (filepath1, filepath2) => {
-  const keys1 = Object.keys(getData(filepath1));
-  const keys2 = Object.keys(getData(filepath2));
-  const values1 = Object.values(getData(filepath1));
-  const values2 = Object.values(getData(filepath2));
+  const keys1 = getKeys(filepath1);
+  const keys2 = getKeys(filepath2);
+  const values1 = getValues(filepath1);
+  const values2 = getValues(filepath2);
   let helper = [];
   for (let i = 0; i < keys1.length; i += 1) {
     if (keys2.includes(keys1[i]) && values2.includes(values1[i])) {
