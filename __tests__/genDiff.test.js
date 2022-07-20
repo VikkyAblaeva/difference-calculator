@@ -9,5 +9,5 @@ const expected = fs.readFileSync(path.resolve('__fixtures__/result.txt'), { enco
 const received = genDiff(pathOfInitialFile, pathOfChangedFile);
 
 test('genDiff', () => {
-  expect(received).toEqual(expected);
+  expect(received).toStrictEqual(expected);
 });
