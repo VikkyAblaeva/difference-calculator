@@ -1,13 +1,34 @@
 name: eslint&test-check
 on: push
 jobs:
-   
-  build:
+   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+        
     steps: 
-      
       - uses: actions/checkout@v2
-      - run: make install
-      - run: make lint
-      - run: make test
-      - run: make test-coverage
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install
+        run: |
+          make install
+        env:
+          CI: true
+      - name: lint
+        run: |
+          make lint
+      - name: test
+        run: |
+          make test
+      - name: test-coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageCommand: make test-coverage
+          debug: true
+      
