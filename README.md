@@ -9,5 +9,5 @@
 
 <h3>Example:</h3>
 
-<a href="https://asciinema.org/a/WyXM2ayRCPaymemJKjRsmeTR2" target="_blank"><img src="https://asciinema.org/a/WyXM2ayRCPaymemJKjRsmeTR2.svg"></a>
+<a href="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk" target="_blank"><img src="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk.svg"></a>
 

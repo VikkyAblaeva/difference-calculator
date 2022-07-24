@@ -1,8 +1,18 @@
 import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
+import yaml from 'js-yaml';
 
-const getJsonData = (filepath) => JSON.parse(fs.readFileSync(path.resolve(filepath), { encoding: 'utf8', flag: 'r' }));
+const getObjectWithData = (filepath) => {
+  let objectWithData = {};
+  if (filepath.slice(-2) === 'on') {
+    objectWithData = JSON.parse(fs.readFileSync(path.resolve(filepath), { encoding: 'utf8', flag: 'r' }));
+  }
+  if (filepath.slice(-2) === 'ml') {
+    objectWithData = yaml.load(fs.readFileSync(path.resolve(filepath), 'utf8'));
+  }
+  return objectWithData;
+};
 
 const getDifferencesToString = (differences) => {
   let differencesToString = '';
@@ -13,12 +23,12 @@ const getDifferencesToString = (differences) => {
 };
 
 const getKeys = (filepath) => {
-  const keys = Object.keys(getJsonData(filepath));
+  const keys = Object.keys(getObjectWithData(filepath));
   return keys;
 };
 
 const getValues = (filepath) => {
-  const values = Object.values(getJsonData(filepath));
+  const values = Object.values(getObjectWithData(filepath));
   return values;
 };
 
@@ -51,4 +61,4 @@ const genDiff = (pathOfInitialFile, pathOfChangedFile) => {
   return differencesToString;
 };
 
-export { getJsonData, genDiff };
+export { getObjectWithData, genDiff };

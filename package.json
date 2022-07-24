@@ -16,7 +16,6 @@
     "url": "https://github.com/VikkyAblaeva/frontend-project-lvl2/issues"
   },
   "type": "module",
-  
   "homepage": "https://github.com/VikkyAblaeva/frontend-project-lvl2#readme",
   "bin": {
     "gendiff": "bin/gendiff.js"
@@ -24,6 +23,7 @@
   "dependencies": {
     "@jest/globals": "^28.1.3",
     "commander": "^9.4.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

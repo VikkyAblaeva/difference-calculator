@@ -3,11 +3,20 @@ import fs from 'fs';
 import { test, expect } from '@jest/globals';
 import { genDiff } from '../src/utils.js';
 
-const pathOfInitialFile = '__fixtures__/file1.json';
-const pathOfChangedFile = '__fixtures__/file2.json';
-const expected = fs.readFileSync(path.resolve('__tests__/__fixtures__/result.txt'), { encoding: 'utf8', flag: 'r' });
-const received = genDiff(pathOfInitialFile, pathOfChangedFile);
+const pathOfInitialFileJson = '__fixtures__/file1.json';
+const pathOfChangedFileJson = '__fixtures__/file2.json';
+const expectedForJsonTest = fs.readFileSync(path.resolve('__tests__/__fixtures__/result.txt'), { encoding: 'utf8', flag: 'r' });
+const receivedForJsonTest = genDiff(pathOfInitialFileJson, pathOfChangedFileJson);
 
-test('genDiff', () => {
-  expect(received).toBe(expected);
+test('genDiffJson', () => {
+  expect(receivedForJsonTest).toBe(expectedForJsonTest);
+});
+
+const pathOfInitialFileYml = '__fixtures__/file1.yml';
+const pathOfChangedFileYml = '__fixtures__/file2.yml';
+const expectedForYmlTest = fs.readFileSync(path.resolve('__tests__/__fixtures__/result.txt'), { encoding: 'utf8', flag: 'r' });
+const receivedForYmlTest = genDiff(pathOfInitialFileYml, pathOfChangedFileYml);
+
+test('genDiffYml', () => {
+  expect(receivedForYmlTest).toBe(expectedForYmlTest);
 });
