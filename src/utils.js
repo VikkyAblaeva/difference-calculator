@@ -5,60 +5,40 @@ import yaml from 'js-yaml';
 
 const getObjectWithData = (filepath) => {
   let objectWithData = {};
-  if (filepath.slice(-2) === 'on') {
+  if (filepath.toString().slice(-4) === 'json') {
     objectWithData = JSON.parse(fs.readFileSync(path.resolve(filepath), { encoding: 'utf8', flag: 'r' }));
   }
-  if (filepath.slice(-2) === 'ml') {
+  if (filepath.toString().slice(-3) === 'yml' || filepath.toString().slice(-4) === 'yaml') {
     objectWithData = yaml.load(fs.readFileSync(path.resolve(filepath), 'utf8'));
   }
   return objectWithData;
 };
 
-const getDifferencesToString = (differences) => {
-  let differencesToString = '';
-  for (let i = 0; i < differences.length; i += 1) {
-    differencesToString = `${differencesToString}\n  ${differences[i].status} ${differences[i].key}: ${differences[i].value}`;
-  }
-  return `{${differencesToString}\n}`;
-};
-
-const getKeys = (filepath) => {
-  const keys = Object.keys(getObjectWithData(filepath));
-  return keys;
-};
-
-const getValues = (filepath) => {
-  const values = Object.values(getObjectWithData(filepath));
-  return values;
-};
-
 const genDiff = (pathOfInitialFile, pathOfChangedFile) => {
-  const keysOfInitialFile = getKeys(pathOfInitialFile);
-  const keysOfChangedFile = getKeys(pathOfChangedFile);
-  const valuesOfInitialFile = getValues(pathOfInitialFile);
-  const valuesOfChsngedFile = getValues(pathOfChangedFile);
-  let differences = [];
-  for (let i = 0; i < keysOfInitialFile.length; i += 1) {
-    if (keysOfChangedFile.includes(keysOfInitialFile[i])
-      && valuesOfChsngedFile.includes(valuesOfInitialFile[i])) {
-      differences.push({ key: keysOfInitialFile[i], value: valuesOfInitialFile[i], status: ' ' });
-    }
-    if (!keysOfChangedFile.includes(keysOfInitialFile[i])
-      || (keysOfChangedFile.includes(keysOfInitialFile[i])
-      && !valuesOfChsngedFile.includes(valuesOfInitialFile[i]))) {
-      differences.push({ key: keysOfInitialFile[i], value: valuesOfInitialFile[i], status: '-' });
-    }
-  }
-  for (let i = 0; i < keysOfChangedFile.length; i += 1) {
-    if (!keysOfInitialFile.includes(keysOfChangedFile[i])
-      || (keysOfInitialFile.includes(keysOfChangedFile[i])
-      && !valuesOfInitialFile.includes(valuesOfChsngedFile[i]))) {
-      differences.push({ key: keysOfChangedFile[i], value: valuesOfChsngedFile[i], status: '+' });
-    }
-  }
-  differences = _.sortBy(differences, ['key']);
-  const differencesToString = getDifferencesToString(differences);
-  return differencesToString;
+  const data1 = getObjectWithData(pathOfInitialFile);
+  const data2 = getObjectWithData(pathOfChangedFile);
+  const iter = (obj1, obj2) => {
+    const obj1Keys = Object.keys(obj1);
+    const obj2keys = Object.keys(obj2);
+    const objectsKeys = _.sortBy(_.union(obj1Keys, obj2keys));
+    const diffResult = objectsKeys.map((key) => {
+      if (!_.has(obj1, key)) {
+        return { key, value: obj2[key], status: 'added' };
+      }
+      if (!_.has(obj2, key)) {
+        return { key, value: obj1[key], status: 'removed' };
+      }
+      if (obj1[key] === obj2[key]) {
+        return { key, value: obj1[key], status: 'unchanged' };
+      }
+      if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
+        return { key, value: iter(obj1[key], obj2[key]), status: 'nested' };
+      }
+      return { key, value: { oldValue: obj1[key], newValue: obj2[key] }, status: 'updated' };
+    });
+    return diffResult;
+  };
+  return iter(data1, data2);
 };
 
 export { getObjectWithData, genDiff };
