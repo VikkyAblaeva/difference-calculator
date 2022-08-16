@@ -11,6 +11,6 @@
 
 <a href="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk" target="_blank"><img src="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk.svg"></a>
 
-<h3>Пример работы с вложенными структурами (форматтер по умолчанию):</h3>
+<h3>Пример работы с вложенными объектами:</h3>
 
 <a href="https://asciinema.org/a/0TypuI0bhb4AFGXcaBAMbgVLf" target="_blank"><img src="https://asciinema.org/a/0TypuI0bhb4AFGXcaBAMbgVLf.svg"></a>
