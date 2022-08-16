@@ -3,7 +3,6 @@
 import { Command } from 'commander';
 import process from 'process';
 import { genDiff } from '../src/utils.js';
-import getStylish from '../src/stylish/stylish.js';
 
 const program = new Command();
 
@@ -14,7 +13,8 @@ program
   .arguments('<filepath1> <filepath2>')
   .parse(process.argv)
   .action((filepath1, filepath2) => {
-    console.log(getStylish(genDiff(filepath1, filepath2)));
+    const formatName = program.opts().format;
+    console.log(genDiff(filepath1, filepath2, formatName));
   });
 
 program.parse();

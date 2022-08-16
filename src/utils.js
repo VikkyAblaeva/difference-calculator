@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 import yaml from 'js-yaml';
+import getFormat from './formatters/index.js';
 
 const getObjectWithData = (filepath) => {
   let objectWithData = {};
@@ -14,9 +15,7 @@ const getObjectWithData = (filepath) => {
   return objectWithData;
 };
 
-const genDiff = (pathOfInitialFile, pathOfChangedFile) => {
-  const data1 = getObjectWithData(pathOfInitialFile);
-  const data2 = getObjectWithData(pathOfChangedFile);
+const buildTree = (tree1, tree2) => {
   const iter = (obj1, obj2) => {
     const obj1Keys = Object.keys(obj1);
     const obj2keys = Object.keys(obj2);
@@ -38,7 +37,16 @@ const genDiff = (pathOfInitialFile, pathOfChangedFile) => {
     });
     return diffResult;
   };
-  return iter(data1, data2);
+  return iter(tree1, tree2);
 };
 
-export { getObjectWithData, genDiff };
+const genDiff = (pathOfInitialFile, pathOfChangedFile, formatName) => {
+  const tree1 = getObjectWithData(pathOfInitialFile);
+  const tree2 = getObjectWithData(pathOfChangedFile);
+  const functionFormat = getFormat(formatName);
+  const diff = buildTree(tree1, tree2);
+  const formattedDiff = functionFormat(diff, tree1, tree2);
+  return formattedDiff;
+};
+
+export { getObjectWithData, buildTree, genDiff };
