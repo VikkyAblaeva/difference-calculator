@@ -9,7 +9,7 @@
 
 <h3>Пример работы с плоскими объектами:</h3>
 
-<a href="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk" target="_blank"><img src="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk.svg"></a>
+<a href="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk?autoplay=1"><img src="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk.png" width="836"/></a>
 
 <h3>Пример работы с вложенными объектами:</h3>
 
