@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { test, expect } from '@jest/globals';
-import { genDiff } from '../src/utils.js';
+import genDiff from '../src/utils.js';
 
 const pathBeforeFileJson = '__fixtures__/file1.json';
 const pathAfterFileJson = '__fixtures__/file2.json';

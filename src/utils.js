@@ -49,4 +49,5 @@ const genDiff = (pathOfInitialFile, pathOfChangedFile, formatName) => {
   return formattedDiff;
 };
 
-export { getObjectWithData, buildTree, genDiff };
+export { getObjectWithData, buildTree };
+export default genDiff;
