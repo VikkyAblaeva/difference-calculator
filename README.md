@@ -13,4 +13,4 @@
 
 <h3>Пример работы с вложенными объектами:</h3>
 
-[![asciicast](https://asciinema.org/a/0TypuI0bhb4AFGXcaBAMbgVLf.png)](https://asciinema.org/a/0TypuI0bhb4AFGXcaBAMbgVLf)
+<a href="https://asciinema.org/a/0TypuI0bhb4AFGXcaBAMbgVLf" target="_blank"><img src="https://asciinema.org/a/0TypuI0bhb4AFGXcaBAMbgVLf.svg"></a>
