@@ -12,6 +12,7 @@
 - Начало работы:
     - git clone https://github.com/VikkyAblaeva/frontend-project-lvl2
     - make install
+    - sudo npm link
 
 
 ### Пример работы с плоскими объектами:

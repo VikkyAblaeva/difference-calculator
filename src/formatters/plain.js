@@ -7,7 +7,7 @@ function findPath(obj, prop) {
   }
   const props = Object.keys(obj);
   for (let i = props.length; i >= 0; i -= 1) {
-    if (typeof obj[props[i]] === 'object') {
+    if (typeof obj[props[i]] === 'object' && obj[props[i]] !== null && obj[props[i]] !== undefined) {
       path = findPath(obj[props[i]], prop);
     }
     if (path) {
