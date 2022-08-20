@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/VikkyAblaeva/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/VikkyAblaeva/frontend-project-lvl2/actions)",
-  "main": "bin/gendiff.js",
+  "main": "src/utils.js",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
@@ -21,7 +21,6 @@
     "gendiff": "bin/gendiff.js"
   },
   "dependencies": {
-    "@jest/globals": "^28.1.3",
     "commander": "^9.4.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"

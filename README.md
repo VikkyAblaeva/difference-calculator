@@ -1,23 +1,18 @@
 ### Hexlet tests and linter status:
-[![Actions Status](https://github.com/VikkyAblaeva/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/VikkyAblaeva/frontend-project-lvl2/actions)
-
-[![Actions Status](https://github.com/VikkyAblaeva/frontend-project-lvl2/workflows/eslint&test-check/badge.svg)](https://github.com/VikkyAblaeva/frontend-project-lvl2/actions)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/3498a7dabc23049c33f8/maintainability)](https://codeclimate.com/github/VikkyAblaeva/frontend-project-lvl2/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/3498a7dabc23049c33f8/test_coverage)](https://codeclimate.com/github/VikkyAblaeva/frontend-project-lvl2/test_coverage)
+[![Actions Status](https://github.com/VikkyAblaeva/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/VikkyAblaeva/frontend-project-lvl2/actions) [![Actions Status](https://github.com/VikkyAblaeva/frontend-project-lvl2/workflows/eslint&test-check/badge.svg)](https://github.com/VikkyAblaeva/frontend-project-lvl2/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/3498a7dabc23049c33f8/maintainability)](https://codeclimate.com/github/VikkyAblaeva/frontend-project-lvl2/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/3498a7dabc23049c33f8/test_coverage)](https://codeclimate.com/github/VikkyAblaeva/frontend-project-lvl2/test_coverage)
 
 ## Вычислитель отличий :collision:
 
 ### Краткое описание: :page_facing_up:
 
-- [X] Программа сравнивает два конфигурационных файла.
-- [X] Cli-утилита принимает два аргумента — пути до этих файлов
+- [X] Программа сравнивает два конфигурационных файла;
+- [X] Cli-утилита принимает два аргумента — пути до этих файлов;
 - [X] Результат сравнения файлов может выводиться в разных форматах.
 
 - Начало работы:
     - git clone https://github.com/VikkyAblaeva/frontend-project-lvl2
     - make install
+    - sudo npm link
 
 
 ### Пример работы с плоскими объектами:
