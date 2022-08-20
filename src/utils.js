@@ -44,9 +44,8 @@ const genDiff = (pathOfInitialFile, pathOfChangedFile, formatName) => {
   const tree1 = getObjectWithData(pathOfInitialFile);
   const tree2 = getObjectWithData(pathOfChangedFile);
   const functionFormat = getFormat(formatName);
-  const diff = buildTree(tree1, tree2);
-  const formattedDiff = functionFormat(diff, tree1, tree2);
-  return formattedDiff;
+  const diff = functionFormat(buildTree(tree1, tree2));
+  return diff;
 };
 
 export { getObjectWithData, buildTree };

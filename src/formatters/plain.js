@@ -1,32 +1,13 @@
 import _ from 'lodash';
 
-function findPath(obj, prop) {
-  let path = '';
-  if (_.has(obj, prop)) {
-    return prop;
-  }
-  const props = Object.keys(obj);
-  for (let i = props.length; i >= 0; i -= 1) {
-    if (typeof obj[props[i]] === 'object') {
-      path = findPath(obj[props[i]], prop);
-    }
-    if (path) {
-      return `${props[i]}.${path}`;
-    }
-  }
-  return null;
-}
-
 const getLine = (key, status, newValue = 0, oldValue = 0) => {
   switch (status) {
     case 'removed':
-      return `Property '${key}' was removed`;
+      return `Property '${key.slice(1, key.length)}' was removed`;
     case 'added':
-      return `Property '${key}' was added with value: ${newValue}`;
+      return `Property '${key.slice(1, key.length)}' was added with value: ${newValue}`;
     case 'updated':
-      return `Property '${key}' was updated. From ${oldValue} to ${newValue}`;
-    case 'unchanged':
-      return '';
+      return `Property '${key.slice(1, key.length)}' was updated. From ${oldValue} to ${newValue}`;
     default:
       return 'Error! Unknown status!';
   }
@@ -36,40 +17,31 @@ const getValue = (value) => {
   if (typeof value === 'string') {
     return `'${value}'`;
   }
+  if (_.isObject(value)) {
+    return '[complex value]';
+  }
   return value;
 };
 
-const plain = (diff, tree1, tree2) => {
-  const items = diff.flatMap(({ key, value, status }) => {
-    if (status === 'nested') {
-      return (plain(value, tree1, tree2));
+const plain = (diff, path = '') => {
+  const filteredDiff = diff.filter((item) => item.status !== 'unchanged');
+  const items = filteredDiff.map((item) => {
+    const newPath = `${path}.${item.key}`;
+    //const pathForLine = newPath.join('.');
+    if (item.status === 'removed') {
+      return getLine(newPath, item.status, getValue(item.value));
     }
-    if (status === 'added') {
-      if (!_.isObject(value)) {
-        return getLine(findPath(tree2, key), status, getValue(value));
-      }
-      return getLine(findPath(tree2, key), status, '[complex value]');
+    if (item.status === 'added') {
+      return getLine(newPath, item.status, getValue(item.value));
     }
-    if (status === 'updated') {
-      if (!_.isObject(value.newValue) && !_.isObject(value.oldValue)) {
-        return getLine(
-          findPath(tree1, key),
-          status,
-          getValue(value.newValue),
-          getValue(value.oldValue),
-        );
-      }
-      if (!_.isObject(value.newValue) && _.isObject(value.oldValue)) {
-        return getLine(findPath(tree1, key), status, getValue(value.newValue), '[complex value]');
-      }
-      if (_.isObject(value.newValue) && !_.isObject(value.oldValue)) {
-        return getLine(findPath(tree1, key), status, '[complex value]', getValue(value.oldValue));
-      }
+    if (item.status === 'updated') {
+      const newValue = getValue(item.value.newValue);
+      const oldValue = getValue(item.value.oldValue);
+      return getLine(newPath, item.status, newValue, oldValue);
     }
-    return getLine(findPath(tree1, key), status, getValue(value));
+    return plain(item.value, newPath);
   });
-  const filtereditems = items.filter((item) => item !== '');
-  return filtereditems.join('\n');
+  return items.join('\n');
 };
 
 export default plain;
