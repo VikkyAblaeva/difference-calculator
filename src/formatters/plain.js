@@ -27,7 +27,6 @@ const plain = (diff, path = '') => {
   const filteredDiff = diff.filter((item) => item.status !== 'unchanged');
   const items = filteredDiff.map((item) => {
     const newPath = `${path}.${item.key}`;
-    //const pathForLine = newPath.join('.');
     if (item.status === 'removed') {
       return getLine(newPath, item.status, getValue(item.value));
     }
