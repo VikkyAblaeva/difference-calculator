@@ -9,16 +9,32 @@
 - [X] Cli-утилита принимает два аргумента — пути до этих файлов;
 - [X] Результат сравнения файлов может выводиться в разных форматах.
 
+### Системыне требования: :computer:
+
+- [X] Поддерживаемая версия Node.js - 17;
+
 - Начало работы:
     - git clone https://github.com/VikkyAblaeva/frontend-project-lvl2
+    - cd frontend-project-lvl2
     - make install
     - sudo npm link
 
+### Установка:
 
-### Пример работы с плоскими объектами:
+<a href="https://asciinema.org/a/WyvfEAiZTkrg8omKWT8Cvzq2d" target="_blank"><img src="https://asciinema.org/a/WyvfEAiZTkrg8omKWT8Cvzq2d.svg" width="500"></a>
 
-<a href="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk" target="_blank"><img src="https://asciinema.org/a/36jPBTpBLIZHvY8fJXrb8hUAk.svg" width="500"></a>
+### Вызов справки (команда gendiff -h):
 
-### Пример работы с вложенными объектами:
+<a href="https://asciinema.org/a/8hqhNIXNh04FwJcU6e0yfnLhW" target="_blank"><img src="https://asciinema.org/a/8hqhNIXNh04FwJcU6e0yfnLhW.svg" width="500"></a>
 
-<a href="https://asciinema.org/a/7k4pjQX9iaoWVNFwkLMtDBK33" target="_blank"><img src="https://asciinema.org/a/7k4pjQX9iaoWVNFwkLMtDBK33.svg" width="500"></a>
+### Пример работы со стандартным форматером Stylish (команда gendiff filepath1.json filepath2.json):
+
+<a href="https://asciinema.org/a/ejbsPkOpE3Y4WrEfY4IWiARUc" target="_blank"><img src="https://asciinema.org/a/ejbsPkOpE3Y4WrEfY4IWiARUc.svg" width="500"></a>
+
+### Пример работы с форматером Plain (команда gendiff -f plain filepath1.json filepath2.json):
+
+<a href="https://asciinema.org/a/8ImVmrUf3X69gIRWVQjtlBtkM" target="_blank"><img src="https://asciinema.org/a/8ImVmrUf3X69gIRWVQjtlBtkM.svg" width="500"></a>
+
+### Пример работы с форматером JSON (команда gendiff -f json filepath1.json filepath2.json):
+
+<a href="https://asciinema.org/a/HpgK0u1X5rB76tRTQJ3kfabDQ" target="_blank"><img src="https://asciinema.org/a/HpgK0u1X5rB76tRTQJ3kfabDQ.svg" width="500"></a>
