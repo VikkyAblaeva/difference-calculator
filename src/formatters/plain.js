@@ -23,7 +23,7 @@ const getValue = (value) => {
   return value;
 };
 
-const plain = (diff, path = '') => {
+const getPlainFormat = (diff, path = '') => {
   const filteredDiff = diff.filter((item) => item.status !== 'unchanged');
   const items = filteredDiff.map((item) => {
     const newPath = `${path}.${item.key}`;
@@ -38,9 +38,9 @@ const plain = (diff, path = '') => {
       const oldValue = getValue(item.value.oldValue);
       return getLine(newPath, item.status, newValue, oldValue);
     }
-    return plain(item.value, newPath);
+    return getPlainFormat(item.value, newPath);
   });
   return items.join('\n');
 };
 
-export default plain;
+export default getPlainFormat;
