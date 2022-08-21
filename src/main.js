@@ -2,7 +2,7 @@ import getFormat from './formatters/index.js';
 import buildTree from './buildTree.js';
 import parseData from './parser.js';
 
-const genDiff = (pathOfInitialFile, pathOfChangedFile, formatName = 'getStylish') => {
+const genDiff = (pathOfInitialFile, pathOfChangedFile, formatName = 'stylish') => {
   const tree1 = parseData(pathOfInitialFile);
   const tree2 = parseData(pathOfChangedFile);
   const functionFormat = getFormat(formatName);

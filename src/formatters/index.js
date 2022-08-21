@@ -8,7 +8,7 @@ const getFormat = (formatName) => {
       return getPlainFormat;
     case 'json':
       return getJsonFormat;
-    case 'getStylish':
+    case 'stylish':
       return getStylish;
     default:
       return 'Error! Unknown formatname!';
