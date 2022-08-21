@@ -13,15 +13,9 @@ describe.each([
   ['__fixtures__/file1.json', '__fixtures__/file2.yml', expectedPlainTest],
   ['__fixtures__/file1.json', '__fixtures__/file2.yml', expectedJsonTest],
 ])('.add(%o, %o)', (fileBefore, fileAfter, expected) => {
-  test(`genDiffStylishTest ${expected}`, () => {
+  test(`genDiffFormatersTest ${expected}`, () => {
     expect(genDiff(fileBefore, fileAfter, formaters[0])).toBe(expectedStylishTest);
-  });
-
-  test(`genDiffPlainTest ${expected}`, () => {
     expect(genDiff(fileBefore, fileAfter, formaters[1])).toBe(expectedPlainTest);
-  });
-
-  test(`genDiffJsonTest ${expected}`, () => {
     expect(genDiff(fileBefore, fileAfter, formaters[2])).toBe(expectedJsonTest);
   });
 });
