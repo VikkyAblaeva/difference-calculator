@@ -27,14 +27,14 @@
 
 <a href="https://asciinema.org/a/8hqhNIXNh04FwJcU6e0yfnLhW" target="_blank"><img src="https://asciinema.org/a/8hqhNIXNh04FwJcU6e0yfnLhW.svg" width="500"></a>
 
-### Пример работы со стандартным форматером Stylish (команда gendiff filepath1.json filepath2.json):
+### Пример работы со стандартным форматером Stylish (команда gendiff <filepath1> <filepath2>):
 
 <a href="https://asciinema.org/a/ejbsPkOpE3Y4WrEfY4IWiARUc" target="_blank"><img src="https://asciinema.org/a/ejbsPkOpE3Y4WrEfY4IWiARUc.svg" width="500"></a>
 
-### Пример работы с форматером Plain (команда gendiff -f plain filepath1.json filepath2.json):
+### Пример работы с форматером Plain (команда gendiff -f plain <filepath1> <filepath2>):
 
 <a href="https://asciinema.org/a/8ImVmrUf3X69gIRWVQjtlBtkM" target="_blank"><img src="https://asciinema.org/a/8ImVmrUf3X69gIRWVQjtlBtkM.svg" width="500"></a>
 
-### Пример работы с форматером JSON (команда gendiff -f json filepath1.json filepath2.json):
+### Пример работы с форматером JSON (команда gendiff -f json <filepath1> <filepath2>):
 
 <a href="https://asciinema.org/a/HpgK0u1X5rB76tRTQJ3kfabDQ" target="_blank"><img src="https://asciinema.org/a/HpgK0u1X5rB76tRTQJ3kfabDQ.svg" width="500"></a>
