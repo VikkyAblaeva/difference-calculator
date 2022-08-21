@@ -3,41 +3,25 @@ import fs from 'fs';
 import { test, expect } from '@jest/globals';
 import genDiff from '../src/main.js';
 
-const pathBeforeFileJson = '__fixtures__/file1.json';
-const pathAfterFileJson = '__fixtures__/file2.json';
-const formatNameStylish = 'stylish';
-const formatNamePlain = 'plain';
-const formatNameJson = 'json';
-const expectedJsonStylishTest = fs.readFileSync(path.resolve('./__fixtures__/stylishResult.txt'), { encoding: 'utf8', flag: 'r' });
-const expectedJsonPlainTest = fs.readFileSync(path.resolve('./__fixtures__/plainResult.txt'), { encoding: 'utf8', flag: 'r' });
-const expectedJsonFormatTest = fs.readFileSync(path.resolve('./__fixtures__/jsonResult.txt'), { encoding: 'utf8', flag: 'r' });
-const receivedJsonStylishTest = genDiff(pathBeforeFileJson, pathAfterFileJson, formatNameStylish);
-const receivedPlainJsonTest = genDiff(pathBeforeFileJson, pathAfterFileJson, formatNamePlain);
+const expectedStylishTest = fs.readFileSync(path.resolve('./__fixtures__/stylishResult.txt'), { encoding: 'utf8', flag: 'r' });
+const expectedPlainTest = fs.readFileSync(path.resolve('./__fixtures__/plainResult.txt'), { encoding: 'utf8', flag: 'r' });
+const expectedJsonTest = fs.readFileSync(path.resolve('./__fixtures__/jsonResult.txt'), { encoding: 'utf8', flag: 'r' });
+const formaters = ['stylish', 'plain', 'json'];
 
-test('genDiffStylishJson', () => {
-  expect(expectedJsonStylishTest).toBe(receivedJsonStylishTest);
-});
+describe.each([
+  ['__fixtures__/file1.json', '__fixtures__/file2.yml', expectedStylishTest],
+  ['__fixtures__/file1.json', '__fixtures__/file2.yml', expectedPlainTest],
+  ['__fixtures__/file1.json', '__fixtures__/file2.yml', expectedJsonTest],
+])('.add(%o, %o)', (fileBefore, fileAfter, expected) => {
+  test(`genDiffStylishTest ${expected}`, () => {
+    expect(genDiff(fileBefore, fileAfter, formaters[0])).toBe(expectedStylishTest);
+  });
 
-test('genDiffPlainJson', () => {
-  expect(expectedJsonPlainTest).toBe(receivedPlainJsonTest);
-});
+  test(`genDiffPlainTest ${expected}`, () => {
+    expect(genDiff(fileBefore, fileAfter, formaters[1])).toBe(expectedPlainTest);
+  });
 
-const pathBeforeFileYml = '__fixtures__/file1.yml';
-const pathAfterFileYml = '__fixtures__/file2.yml';
-const expectedYmlStylishTest = fs.readFileSync(path.resolve('./__fixtures__/stylishResult.txt'), { encoding: 'utf8', flag: 'r' });
-const expectedYmlPlainTest = fs.readFileSync(path.resolve('./__fixtures__/plainResult.txt'), { encoding: 'utf8', flag: 'r' });
-const receivedYmlStylishTest = genDiff(pathBeforeFileYml, pathAfterFileYml, formatNameStylish);
-const receivedYmlPlainTest = genDiff(pathBeforeFileYml, pathAfterFileYml, formatNamePlain);
-const receivedJsonFormatTest = genDiff(pathBeforeFileJson, pathAfterFileYml, formatNameJson);
-
-test('genDiffStylishYml', () => {
-  expect(expectedYmlStylishTest).toBe(receivedYmlStylishTest);
-});
-
-test('genDiffPlainYml', () => {
-  expect(expectedYmlPlainTest).toBe(receivedYmlPlainTest);
-});
-
-test('genDiffJsonFormatTest', () => {
-  expect(expectedJsonFormatTest).toBe(receivedJsonFormatTest);
+  test(`genDiffJsonTest ${expected}`, () => {
+    expect(genDiff(fileBefore, fileAfter, formaters[2])).toBe(expectedJsonTest);
+  });
 });
