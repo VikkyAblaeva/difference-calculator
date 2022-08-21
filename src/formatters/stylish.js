@@ -30,6 +30,6 @@ const stylish = (diff, depth) => {
   return getBodyWithIndentations(body, depth);
 };
 
-const getStylish = (diff) => stylish(diff, 0);
+const formatStylish = (diff) => stylish(diff, 0);
 
-export default getStylish;
+export default formatStylish;

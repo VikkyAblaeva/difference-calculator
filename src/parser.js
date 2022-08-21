@@ -12,7 +12,7 @@ const parseData = (filepath) => {
     case 'yaml':
       return yaml.load(fs.readFileSync(path.resolve(filepath), 'utf8'));
     default:
-      return 'Error! Unknown format!';
+      return `Error! ${extension} is unknown extname!`;
   }
 };
 

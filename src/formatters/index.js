@@ -1,17 +1,17 @@
-import getStylish from './stylish.js';
-import getPlainFormat from './plain.js';
-import getJsonFormat from './json.js';
+import formatStylish from './stylish.js';
+import formatPlain from './plain.js';
+import formatJsonString from './json.js';
 
 const getFormat = (formatName) => {
   switch (formatName) {
     case 'plain':
-      return getPlainFormat;
+      return formatPlain;
     case 'json':
-      return getJsonFormat;
+      return formatJsonString;
     case 'stylish':
-      return getStylish;
+      return formatStylish;
     default:
-      return 'Error! Unknown formatname!';
+      return `Error! ${formatName} is unknown formatname!`;
   }
 };
 
