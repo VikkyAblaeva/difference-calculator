@@ -1,16 +1,13 @@
-import path from 'path';
-import fs from 'fs';
 import yaml from 'js-yaml';
 
-const parseData = (filepath) => {
-  const extension = path.extname(filepath).slice(1);
+const parseData = (readFile, extension) => {
   switch (extension) {
     case 'json':
-      return JSON.parse(fs.readFileSync(path.resolve(filepath), { encoding: 'utf8', flag: 'r' }));
+      return JSON.parse(readFile, { encoding: 'utf8', flag: 'r' });
     case 'yml':
-      return yaml.load(fs.readFileSync(path.resolve(filepath), 'utf8'));
+      return yaml.load(readFile, 'utf8');
     case 'yaml':
-      return yaml.load(fs.readFileSync(path.resolve(filepath), 'utf8'));
+      return yaml.load(readFile, 'utf8');
     default:
       return `Error! ${extension} is unknown extname!`;
   }

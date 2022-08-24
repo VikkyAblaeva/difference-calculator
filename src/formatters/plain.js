@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-const getLine = (parametres) => {
-  const [key, status, newValue, oldValue] = parametres;
+const getLine = (params) => {
+  const [key, status, newValue, oldValue] = params;
   switch (status) {
     case 'removed':
       return `Property '${key.slice(1, key.length)}' was removed`;
@@ -26,7 +26,7 @@ const getValue = (value) => {
 
 const formatPlain = (diff, path = '') => {
   const filteredDiff = diff.filter((item) => item.status !== 'unchanged');
-  const items = filteredDiff.map((item) => {
+  const lines = filteredDiff.map((item) => {
     const newPath = `${path}.${item.key}`;
     if (item.status === 'removed') {
       return getLine([newPath, item.status, getValue(item.value)]);
@@ -41,7 +41,7 @@ const formatPlain = (diff, path = '') => {
     }
     return formatPlain(item.value, newPath);
   });
-  return items.join('\n');
+  return lines.join('\n');
 };
 
 export default formatPlain;
