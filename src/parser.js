@@ -1,13 +1,13 @@
 import yaml from 'js-yaml';
 
-const parseData = (readFile, extension) => {
+const parseData = (data, extension) => {
   switch (extension) {
     case 'json':
-      return JSON.parse(readFile, { encoding: 'utf8', flag: 'r' });
+      return JSON.parse(data, { encoding: 'utf8', flag: 'r' });
     case 'yml':
-      return yaml.load(readFile, 'utf8');
+      return yaml.load(data, 'utf8');
     case 'yaml':
-      return yaml.load(readFile, 'utf8');
+      return yaml.load(data, 'utf8');
     default:
       return `Error! ${extension} is unknown extname!`;
   }

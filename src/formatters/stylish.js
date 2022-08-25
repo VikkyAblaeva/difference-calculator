@@ -15,7 +15,7 @@ const getValue = (value, depth) => {
 };
 
 const stylish = (diff, depth) => {
-  const items = diff.flatMap(({ key, value, status }) => {
+  const diffsOutput = diff.flatMap(({ key, value, status }) => {
     const symbols = { added: '+ ', removed: '- ', unchanged: '  ' };
     if (status === 'updated') {
       return [getLine(key, getValue(value.oldValue, depth + 1), symbols.removed, depth + 1),
@@ -26,8 +26,8 @@ const stylish = (diff, depth) => {
     }
     return getLine(key, getValue(value, depth + 1), symbols[status], depth + 1);
   });
-  const body = items.join('\n');
-  return getBodyWithIndentations(body, depth);
+  const diffLines = diffsOutput.join('\n');
+  return getBodyWithIndentations(diffLines, depth);
 };
 
 const formatStylish = (diff) => stylish(diff, 0);
