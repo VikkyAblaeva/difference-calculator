@@ -5,7 +5,6 @@ const parseData = (data, extension) => {
     case 'json':
       return JSON.parse(data, { encoding: 'utf8', flag: 'r' });
     case 'yml':
-      return yaml.load(data, 'utf8');
     case 'yaml':
       return yaml.load(data, 'utf8');
     default:
