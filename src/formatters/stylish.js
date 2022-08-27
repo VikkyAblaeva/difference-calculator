@@ -1,9 +1,6 @@
 import _ from 'lodash';
 
-const getLine = (params, spacesCount = 4) => {
-  const [key, value, char, depth] = params;
-  return `  ${' '.repeat(spacesCount).repeat(depth - 1)}${char}${key}: ${value}`;
-};
+const getIndent = (depth, spacesCount = 4) => `  ${' '.repeat(spacesCount).repeat(depth - 1)}`;
 
 const getStylishFormat = (body, depth, spacesCount = 4) => `{\n${body}\n${' '.repeat(spacesCount).repeat(depth)}}`;
 
@@ -12,7 +9,7 @@ const getValue = (value, depth) => {
     return value;
   }
   const entries = Object.entries(value);
-  const items = entries.map(([key, val]) => getLine([key, getValue(val, depth + 1), '  ', depth + 1]));
+  const items = entries.map(([key, val]) => `${getIndent(depth + 1)}  ${key}: ${getValue(val, depth + 1)}`);
   const body = items.join('\n');
   return getStylishFormat(body, depth);
 };
@@ -22,12 +19,12 @@ const stylish = (diff, depth) => {
     const symbols = { added: '+ ', removed: '- ', unchanged: '  ' };
     switch (status) {
       case 'updated':
-        return [getLine([key, getValue(value.oldValue, depth + 1), symbols.removed, depth + 1]),
-          getLine([key, getValue(value.newValue, depth + 1), symbols.added, depth + 1])];
+        return [`${getIndent(depth + 1)}${symbols.removed}${key}: ${getValue(value.oldValue, depth + 1)}`,
+        `${getIndent(depth + 1)}${symbols.added}${key}: ${getValue(value.newValue, depth + 1)}`];
       case 'nested':
-        return getLine([key, stylish(value, depth + 1), '  ', depth + 1]);
+        return `${getIndent(depth + 1)}  ${key}: ${stylish(value, depth + 1)}`;
       default:
-        return getLine([key, getValue(value, depth + 1), symbols[status], depth + 1]);
+        return `${getIndent(depth + 1)}${symbols[status]}${key}: ${getValue(value, depth + 1)}`;
     }
   });
   const formattedDiffs = diffLines.join('\n');
