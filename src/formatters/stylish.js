@@ -20,7 +20,7 @@ const stylish = (diff, depth) => {
     switch (status) {
       case 'updated':
         return [`${getIndent(depth + 1)}${symbols.removed}${key}: ${getValue(value.oldValue, depth + 1)}`,
-        `${getIndent(depth + 1)}${symbols.added}${key}: ${getValue(value.newValue, depth + 1)}`];
+          `${getIndent(depth + 1)}${symbols.added}${key}: ${getValue(value.newValue, depth + 1)}`];
       case 'nested':
         return `${getIndent(depth + 1)}  ${key}: ${stylish(value, depth + 1)}`;
       default:
