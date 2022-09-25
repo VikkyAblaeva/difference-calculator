@@ -14,8 +14,8 @@
 - [X] Поддерживаемая версия Node.js - 17;
 
 - Начало работы:
-    - git clone https://github.com/VikkyAblaeva/frontend-project-lvl2
-    - cd frontend-project-lvl2
+    - git clone https://github.com/VikkyAblaeva/difference-calculator
+    - cd difference-calculator
     - make install
     - sudo npm link
 
